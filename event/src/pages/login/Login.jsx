@@ -25,7 +25,7 @@ const Login = () => {
                     </div>
                     <div className="link_senha">
                         <a href="">Esqueceu a senha?</a>
-                     </div>
+                    </div>
                     <Botao nomeDoBotao="Login" />
                 </form>
             </section>

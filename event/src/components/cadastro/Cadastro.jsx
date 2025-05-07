@@ -7,9 +7,8 @@ const Cadastro = (props) => {
         <section className="section_cadastro">
             <form action="" className="layout_grid form_cadastro">
                 <div className="div_titulo">
-                    {/* <h1>{props.titulo}</h1> */}
-                    <h1>hgfhgjds</h1>
-                    {/* <hr /> */}
+                    <h1>{props.titulo}</h1>
+                     <hr /> 
                 </div>
                 <div className="imagem_form">
                     <div className="img">
@@ -20,10 +19,10 @@ const Cadastro = (props) => {
                     <div className="campo_cadastro">
                         <div className="campo_cadNome">
                             <label htmlFor="nome">Nome</label>
-                            <input type="text" name="nome" placeholder={`Digite o nome do ${props.placeholder}`} />
+                            <input type="text" name="nome" placeholder={` ${props.placeholder}`} />
                         </div>
 
-                        <div className="campo_cadTipoEvento">
+                        <div className="campo_cadTipoEvento"  style = {{display:props.visivel}}>
                             <label htmlFor="TipoEvento">Tipo Evento</label>
                             <select name="TipoEvento" id="">
                                 <option value="" disabled selected>Selecione</option>
