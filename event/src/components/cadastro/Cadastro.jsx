@@ -12,14 +12,14 @@ const Cadastro = (props) => {
                 </div>
                 <div className="imagem_form">
                     <div className="img">
-                        <img src={Imagem} alt="Imagem Cadastro" />
+                        <img src={Imagem} alt="Imagem Cadastro" style={props.imagem} />
                     </div>
 
 
                     <div className="campo_cadastro">
                         <div className="campo_cadNome">
                             <label htmlFor="nome">Nome</label>
-                            <input type="text" name="nome" placeholder={` ${props.placeholder}`} />
+                            <input type="text" name="nome" placeholder= {` ${props.placeholder}`} />
                         </div>
 
                         <div className="campo_cadTipoEvento"  style = {{display:props.visivel}}>

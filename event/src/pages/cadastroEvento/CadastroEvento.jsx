@@ -11,8 +11,9 @@ const Cadastrar = () => {
             <Header/>
             <main>
                 <Cadastro titulo ="Cadastro de Evento" placeholder ="Nome:" />
-                <Listagem/>
+                <Listagem tituloLista="Lista eventos"/>
             </main>
+
             <Footer/>
         </Fragment>
     )
