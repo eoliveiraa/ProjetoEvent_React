@@ -15,7 +15,7 @@ const Header = (props) => {
                     <Link className="link_header" to="/TipoEvento">Eventos</Link>
                     <Link className="link_header" to="/TipoUsuario">Usuarios</Link>
                     <Link className="link_header" to="/Contatos">Contatos</Link>
-                    <Link className="link_header" to="/Administrador">Administrador</Link>
+                    <Link className="link_header" to="/Administrador">{props.adm}</Link>
                     <Link to="/">
                     <img src={Porta} alt="Imagem de porta"/>
                     </Link>

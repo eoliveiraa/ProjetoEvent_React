@@ -23,7 +23,7 @@ const Listagem = (props) => {
                     <tbody>
                         <tr className="item_lista">
                             <td data-cell="Nome" style={{display:props.visivel}}>Nome do Evento</td>
-                            <td data-cell="Tipo Evento" style={{display:props.tipo}}> Tipo Evento</td>
+                            <td data-cell="Tipo Evento" style={{display:props.tipo}}>Tipo Evento</td>
                             <td data-cell="Editar"><img src={editar} alt="Caneta" /></td>
                             <td data-cell="Excluir"><img src={excluir} alt="Lixeira" /></td>
                         </tr>

@@ -9,7 +9,7 @@ import banner from "../../assets/img/tipousuario.svg";
 const TipoUsuario = () => {
     return (
         <Fragment>
-            <Header/>
+            <Header adm="Administrador"/>
             <main>
                 <Cadastro titulo="Tipo De Usuario" imagem={banner} placeholder="Titulo"/>
                 <Listagem tituloLista="Lista Tipos de Usuarios" visivel="none" tipo="Tipo Usuario"/>

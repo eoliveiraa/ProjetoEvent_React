@@ -10,7 +10,7 @@ import banner from "../../assets/img/cadastroeventos.svg"
 const Cadastrar = () => {
     return (
         <Fragment>
-            <Header/>
+            <Header adm="Administrador"/>
             <main>
                 <Cadastro titulo ="Cadastro de Evento" placeholder="Nome:" 
                 imagem={banner}/>

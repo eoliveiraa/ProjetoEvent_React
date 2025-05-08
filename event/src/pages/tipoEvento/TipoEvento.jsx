@@ -11,7 +11,7 @@ import banner from "../../assets/img/tipoevento.svg"
 const TipoEvento = () => {
     return (
         <Fragment>
-            <Header/>
+            <Header adm="Administrador"/>
             <main>
                <Cadastro titulo="Tipo De Evento" visivel="none" 
                  imagem={banner} placeholder="Titulo"/> 

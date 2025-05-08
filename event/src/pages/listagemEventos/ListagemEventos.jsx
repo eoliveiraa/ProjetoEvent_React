@@ -8,7 +8,7 @@ import Toggle from "../../components/toggle/Toggle";
 const ListagemEventos = () => {
     return (
         <Fragment>
-            <Header/>
+            <Header adm="Alunos"/>
             <section className="listagemEventos" id="">
                 <h1>Eventos</h1>
                 <hr />
