@@ -4,13 +4,16 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Cadastro from "../../components/cadastro/Cadastro";
 import Listagem from "../../components/lista/Lista";
+import banner from "../../assets/img/cadastroeventos.svg"
+
 
 const Cadastrar = () => {
     return (
         <Fragment>
             <Header/>
             <main>
-                <Cadastro titulo ="Cadastro de Evento" placeholder ="Nome:" />
+                <Cadastro titulo ="Cadastro de Evento" placeholder="Nome:" 
+                imagem={banner}/>
                 <Listagem tituloLista="Lista eventos"/>
             </main>
 

@@ -3,7 +3,7 @@ import Logo from "../../assets/img/logo1.svg";
 import { Link } from "react-router-dom"
 import Porta from "../../assets/img/icon.svg"
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header>
             <div className="layout_grid cabecalho">
@@ -12,11 +12,13 @@ const Header = () => {
                 </Link>
                 <nav className="nav_header">
                     <Link className="link_header" to="/Home">Home</Link>
-                    <Link className="link_header" to="/Eventos">Eventos</Link>
-                    <Link className="link_header" to="/Usuarios">Usuarios</Link>
+                    <Link className="link_header" to="/TipoEvento">Eventos</Link>
+                    <Link className="link_header" to="/TipoUsuario">Usuarios</Link>
                     <Link className="link_header" to="/Contatos">Contatos</Link>
                     <Link className="link_header" to="/Administrador">Administrador</Link>
+                    <Link to="/">
                     <img src={Porta} alt="Imagem de porta"/>
+                    </Link>
                 </nav>
 
 
