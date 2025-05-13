@@ -7,6 +7,7 @@ Este projeto foi desenvolvido como parte do meu processo de aprendizado em React
 - React
 - JavaScript
 - CSS
+- HTML
 
 
 
