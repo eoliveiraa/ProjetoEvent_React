@@ -18,8 +18,7 @@ const ListagemEventos = () => {
 
                 <select className="select">
                     <option value="" disabled selected>Todos os Eventos</option>
-                    <option value="">ping pong</option>
-                    <option value="">Games</option>
+                    <option value=""></option>
                 </select>
 
                     <table>

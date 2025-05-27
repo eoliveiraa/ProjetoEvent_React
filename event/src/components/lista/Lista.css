@@ -9,8 +9,11 @@
 
 .listagem{
     background-color: #b51d44;
-    width: 100%;
-    height: 300px;
+    min-height: calc(100vh - (75px + 252px + 40px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
 }
 
 .tabela {
@@ -68,6 +71,12 @@
     border-bottom: solid 1px rgb(240, 231, 231);
 }
 
+.botaoExcluirEditar {
+    cursor: pointer;
+    /* background-color: white; */
+    border: none;
+
+}
 
 
 @media screen and (max-width:768px) {
