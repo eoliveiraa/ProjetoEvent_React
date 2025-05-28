@@ -19,6 +19,7 @@ const Cadastrar = () => {
     const [tipoEvento, setTipoEvento] = useState("");
     const [listaTipoEvento, setListaTipoEvento] = useState([])
     const [listaEvento, setListaEvento] = useState([])
+    const [excluirEvento, setExcluirEvento] = useState([])
 
     function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
@@ -49,6 +50,16 @@ const Cadastrar = () => {
 
     }
 
+    async function deletarEvento(id) {
+        try {
+            const excluirEvento = await api.delete(`eventos/${id.idEvento}`)
+            setExcluirEvento(excluirEvento.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
 
     async function listarEvento() {
         try {
@@ -62,9 +73,9 @@ const Cadastrar = () => {
 
     async function cadastrarEvento(evt) {
         evt.preventDefault();
-        if (evento.trim() != "") {
+        if (evento.trim() !== "") {
             try {
-                await api.post("Eventos", { nomeEvento: evento, idTipoEvento: tipoEvento, dataEvento: dataEvento, descricao: descricao, idInstituicao: instituicao });
+                await api.post("eventos", { nomeEvento: evento, idTipoEvento: tipoEvento, dataEvento: dataEvento, descricao: descricao, idInstituicao: instituicao });
                 alertar("success", "Cadastro realizado com sucesso!");
                 setEvento("");
                 setDataEvento();
@@ -80,15 +91,17 @@ const Cadastrar = () => {
         }
     }
 
+
     useEffect(() => {
         listarTipoEvento();
-    }, [])
+        listarEvento();
+    }, [listaEvento]);
 
 
 
     return (
         <Fragment>
-            <Header adm="Administrador" />
+            <Header adm="Administrador"/>
             <main>
                 <Cadastro titulo="Cadastro de Evento" placeholder="Nome:"
                     imagem={banner}
@@ -111,12 +124,14 @@ const Cadastrar = () => {
                     setValorDate={setDataEvento}
                     valorDate={dataEvento}
 
+                    lista={listaTipoEvento}
+
                 />
 
                 <Listagem tituloLista="Lista eventos"
                     lista={listaEvento}
                     tipoLista="Eventos"
-                // funcExcluir={deletarEvento}
+                    funcExcluir={deletarEvento}
                 // funcEditar={editarEvento}/
                 />
             </main>
