@@ -13,12 +13,12 @@ const Listagem = (props) => {
                 <table>
                     <thead>
                         <tr className="table_cabecalho">
-                            <th style={{ display: props.visivel }}>Nome</th>
+                            <th style={{ display:props.visivel}}>Nome</th>
                             <th>{props.tipo}</th>
                             <th style={{display:props.visivelTipo}}>Tipo Evento</th>
                             <th>Editar</th>
                             <th>Excluir</th>
-                            <th style={{ display: props.visivelD }}>Descriçao</th>
+                            <th style={{ display:props.visivelD}}>Descriçao</th>
                         </tr>
                     </thead>
                     {props.lista && props.lista.length > 0 ? (
@@ -44,7 +44,7 @@ const Listagem = (props) => {
                                         />
                                     </td>
 
-                                     <td data-cell="Descrição" className="descricao">
+                                     <td style={{ display:props.visivelD}} data-cell="Descrição" className="descricao">
                                     <img src={Detalhes} alt="Detalhes"onClick={() => { props.funcDescricao(item) }} style={{ cursor: "pointer" }} />
                                 </td>
 
