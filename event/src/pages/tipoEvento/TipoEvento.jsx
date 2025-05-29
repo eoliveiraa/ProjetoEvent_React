@@ -136,7 +136,9 @@ const TipoEvento = () => {
                     funcExcluir={deletarTipoEvento}
                     funcEditar={editarTipoEvento} 
                     tipoLista="tiposEventos"
-                    visivelD="none"/>
+                    visivelD="none"
+                    tipo="Titulo"
+                    visivelTipo="none"/>
             </main>
             <Footer/>
         </Fragment>

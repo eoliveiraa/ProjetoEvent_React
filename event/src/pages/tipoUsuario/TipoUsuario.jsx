@@ -137,7 +137,8 @@ const TipoUsuario = () => {
                     funcExcluir={deletarTipoUsuario}
                     funcEditar={editarTipoUsuario}
                     tipoLista="TiposUsuarios"
-                    visivelD="none"/>
+                    visivelD="none"
+                    visivelTipo="none"/>
 
             </main>
             <Footer />
