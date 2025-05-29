@@ -101,6 +101,7 @@ const Cadastrar = () => {
     }
 
 
+<<<<<<< HEAD
     async function editarEvento(evento) {
         const { value: novoEvento } = await Swal.fire({
             title: "Modifique seu evento",
@@ -137,12 +138,18 @@ const Cadastrar = () => {
         listarTipoEvento();
         listarEvento();
     }, [listarEvento]);
+=======
+    useEffect(() => {
+        listarTipoEvento();
+        listarEvento();
+    }, [listaEvento]);
+>>>>>>> 32b701c1b191c3ef7f67b0fb61cfa38a2e5d225a
 
 
 
     return (
         <Fragment>
-            <Header adm="Administrador" />
+            <Header adm="Administrador"/>
             <main>
                 <Cadastro titulo="Cadastro de Evento" placeholder="Nome:"
                     imagem={banner}
@@ -173,9 +180,13 @@ const Cadastrar = () => {
                     lista={listaEvento}
                     tipoLista="Eventos"
                     funcExcluir={deletarEvento}
+<<<<<<< HEAD
                     funcEditar={editarEvento}
                     funcDescricao={DescricaoEvento}
                     tipo="Data Evento"
+=======
+                // funcEditar={editarEvento}/
+>>>>>>> 32b701c1b191c3ef7f67b0fb61cfa38a2e5d225a
                 />
             </main>
 
