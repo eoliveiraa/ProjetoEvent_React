@@ -3,6 +3,8 @@ import editar from "../../assets/img/editar.svg";
 import excluir from "../../assets/img/excluir.svg";
 import Detalhes from "../../assets/img/descricao.svg"
 
+import { format } from "date-fns";
+
 const Listagem = (props) => {
     return (
         <section className="listagem">
@@ -13,12 +15,12 @@ const Listagem = (props) => {
                 <table>
                     <thead>
                         <tr className="table_cabecalho">
-                            <th style={{ display:props.visivel}}>Nome</th>
+                            <th style={{ display: props.visivel }}>Nome</th>
                             <th>{props.tipo}</th>
-                            <th style={{display:props.visivelTipo}}>Tipo Evento</th>
+                            <th style={{ display: props.visivelTipo }}>Tipo Evento</th>
                             <th>Editar</th>
                             <th>Excluir</th>
-                            <th style={{ display:props.visivelD}}>Descriçao</th>
+                            <th style={{ display: props.visivelD }}>Descriçao</th>
                         </tr>
                     </thead>
                     {props.lista && props.lista.length > 0 ? (
@@ -29,8 +31,10 @@ const Listagem = (props) => {
                                         {props.tipoLista == "tiposEventos" ? item.tituloTipoEvento : (props.tipoLista == "tiposUsuarios" ? item.tituloTipoUsuario : item.nomeEvento)}
                                     </td>
 
-                                    <td data-cell="Data">
-                                        {item.dataEvento}
+                                    <td data-cell="Data"  style={{ display:props.visivelDt}}>
+                                        {item.dataEvento
+                                            ? format(new Date(item.dataEvento), 'dd/MM/yyyy')
+                                            : 'Sem data'}
                                     </td>
 
                                     <td data-cell="Evento">{props.nomeEvento}{item.tiposEvento?.tituloTipoEvento}</td>
@@ -43,10 +47,10 @@ const Listagem = (props) => {
                                             style={{ cursor: "pointer" }}
                                         />
                                     </td>
-
-                                     <td style={{ display:props.visivelD}} data-cell="Descrição" className="descricao">
-                                    <img src={Detalhes} alt="Detalhes"onClick={() => { props.funcDescricao(item) }} style={{ cursor: "pointer" }} />
-                                </td>
+                                   
+                                    <td style={{ display: props.visivelD }} data-cell="Descrição" className="descricao">
+                                        <img src={Detalhes} alt="Detalhes" onClick={() => { props.funcDescricao(item) }} style={{ cursor: "pointer" }} />
+                                    </td>
 
                                 </tr>
                             </tbody>

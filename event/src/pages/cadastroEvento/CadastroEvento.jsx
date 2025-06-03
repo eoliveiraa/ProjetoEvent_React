@@ -54,7 +54,7 @@ const Cadastrar = () => {
         try {
             const excluirEvento = await api.delete(`eventos/${id.idEvento}`)
             setExcluirEvento(excluirEvento.data)
-            alertar("success", "Cadastro realizado com sucesso!");
+            alertar("success", "deletado com sucesso!");
         }
         catch (error) {
             alertar("error", "Erro ao deletar")
@@ -66,7 +66,7 @@ const Cadastrar = () => {
         try {
             const resposta = await api.get("Eventos")
             setListaEvento(resposta.data)
-            listarEvento();
+            // listarEvento();
 
         } catch (error) {
             console.log(error);
@@ -106,6 +106,9 @@ const Cadastrar = () => {
 
 
     async function editarEvento(evento) {
+
+        console.log("Dado recebido para edição:", evento);
+
         try {
             const tiposOptions = listaTipoEvento
                 .map(tipo => `<option value="${tipo.idTipoEvento}" ${tipo.idTipoEvento === evento.idTipoEvento ? 'selected' : ''}>${tipo.tituloTipoEvento}</option>`)
@@ -162,59 +165,58 @@ const Cadastrar = () => {
             Swal.fire("Erro!", "Não foi possível atualizar.", "error");
         }
 
-}
-useEffect(() => {
-    listarTipoEvento();
-    listarEvento();
-    cadastrarEvento();
-}, []);
+    }
+    useEffect(() => {
+        listarTipoEvento();
+        listarEvento();
+    }, []);
 
 
-return (
-    <Fragment>
-        <Header adm="Administrador" />
-        <main>
-            <Cadastro titulo="Cadastro de Evento" placeholder="Nome:"
-                imagem={banner}
-                funcCadastro={cadastrarEvento}
+    return (
+        <Fragment>
+            <Header adm="Administrador" />
+            <main>
+                <Cadastro titulo="Cadastro de Evento" placeholder="Nome:"
+                    imagem={banner}
+                    funcCadastro={cadastrarEvento}
 
-                valorInput={evento}
-                setValorInput={setEvento}
+                    valorInput={evento}
+                    setValorInput={setEvento}
 
-                valorSelect={tipoEvento}
-                setValorSelect={setTipoEvento}
-
-
-
-                setValorText={setDescricao}
-                valorText={descricao}
-
-                setValorSelect1={setInstituicao}
-                valorSelect1={instituicao}
-
-                setValorDate={setDataEvento}
-                valorDate={dataEvento}
-
-                lista={listaTipoEvento}
+                    valorSelect={tipoEvento}
+                    setValorSelect={setTipoEvento}
 
 
-            />
 
-            <Listagem tituloLista="Lista eventos"
-                lista={listaEvento}
-                tipoLista="Eventos"
-                funcExcluir={deletarEvento}
-                funcEditar={editarEvento}
-                funcDescricao={DescricaoEvento}
-                tipo="Data Evento"
-            // funcEditar={editarEvento}/
+                    setValorText={setDescricao}
+                    valorText={descricao}
 
-            />
-        </main>
+                    setValorSelect1={setInstituicao}
+                    valorSelect1={instituicao}
 
-        <Footer />
-    </Fragment>
-)
+                    setValorDate={setDataEvento}
+                    valorDate={dataEvento}
+
+                    lista={listaTipoEvento}
+
+
+                />
+
+                <Listagem tituloLista="Lista eventos"
+                    lista={listaEvento}
+                    tipoLista="Eventos"
+                    funcExcluir={deletarEvento}
+                    funcEditar={editarEvento}
+                    funcDescricao={DescricaoEvento}
+                    tipo="Data Evento"
+                // funcEditar={editarEvento}/
+
+                />
+            </main>
+
+            <Footer />
+        </Fragment>
+    )
 }
 
 export default Cadastrar;

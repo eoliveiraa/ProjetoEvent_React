@@ -138,7 +138,8 @@ const TipoEvento = () => {
                     tipoLista="tiposEventos"
                     visivelD="none"
                     tipo="Titulo"
-                    visivelTipo="none"/>
+                    visivelTipo="none"
+                    visivelDt="none"/>
             </main>
             <Footer/>
         </Fragment>

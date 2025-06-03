@@ -107,7 +107,8 @@ const TipoUsuario = () => {
         });
         if (novoTipo) {
             try {
-                api.put(`TiposUsuarios/${tipoUsuario.idTipoUsuario}`, { TituloTipoUsuario: novoTipo });
+                await api.put(`TiposUsuarios/${tipoUsuario.idTipoUsuario}`, { TituloTipoUsuario: novoTipo });
+
                 Swal.fire(`tipo usuario modificado para: ${novoTipo}`);
             } catch (error) {
                 console.log(error);
@@ -119,12 +120,12 @@ const TipoUsuario = () => {
 
     useEffect(() => {
         listarTipoUsuario();
-    }, [listarTipoUsuario])
+    }, [])
 
 
     return (
         <Fragment>
-            <Header adm="Administrador" />
+            <Header adm="Administrador"/>
             <main>
                 <Cadastro titulo="Tipo De Usuario" imagem={banner} placeholder="Titulo"
                     funcCadastro={cadastrarTipoUsuario}
@@ -138,7 +139,8 @@ const TipoUsuario = () => {
                     funcEditar={editarTipoUsuario}
                     tipoLista="TiposUsuarios"
                     visivelD="none"
-                    visivelTipo="none"/>
+                    visivelTipo="none"
+                    visivelDt="none" />
 
             </main>
             <Footer />

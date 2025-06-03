@@ -7,7 +7,7 @@
 
 }
 
-.listagem{
+.listagem {
     background-color: #b51d44;
     min-height: calc(100vh - (75px + 252px + 40px));
     display: flex;
@@ -57,17 +57,24 @@
 
 
 
-.tabela .table_cabecalho :first-child {
+.tabela .table_cabecalho th:first-child {
     width: 300px;
     padding: 20px;
 }
 
-.tabela .table_cabecalho :nth-child(2) {
+.tabela .table_cabecalho th:nth-child(2) {
     width: 200px;
 
 }
 
-.table_cabecalho{
+.tabela th,
+.tabela td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.table_cabecalho {
     border-bottom: solid 1px rgb(240, 231, 231);
 }
 
@@ -78,9 +85,7 @@
 
 }
 
-.descricao{
-    
-}
+
 
 
 @media screen and (max-width:768px) {
