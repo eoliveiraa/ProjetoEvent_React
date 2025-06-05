@@ -125,7 +125,7 @@ const TipoUsuario = () => {
 
     return (
         <Fragment>
-            <Header adm="Administrador"/>
+            <Header adm="Administrador" />
             <main>
                 <Cadastro titulo="Tipo De Usuario" imagem={banner} placeholder="Titulo"
                     funcCadastro={cadastrarTipoUsuario}
@@ -133,14 +133,19 @@ const TipoUsuario = () => {
                     setValorInput={setTipoUsuario}
                     visivel="none"
                     visibilidade="none" />
-                <Listagem tituloLista="Lista Tipos de Usuarios" visivel="none" tipo="Tipo Usuario"
+                <Listagem
+                    tituloLista="Lista Tipos de Usuarios"
+                    visivel="none"
+                    tipo="Tipo Usuario"
                     lista={listaTipoUsuario}
                     funcExcluir={deletarTipoUsuario}
                     funcEditar={editarTipoUsuario}
-                    tipoLista="TiposUsuarios"
+                    tipoLista="tiposUsuarios"  
                     visivelD="none"
                     visivelTipo="none"
-                    visivelDt="none" />
+                    visivelDt="none"
+                />
+
 
             </main>
             <Footer />

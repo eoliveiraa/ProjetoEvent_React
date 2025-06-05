@@ -10,18 +10,40 @@ import Modal from "../../components/modal/Modal";
 import api from "../../Services/services";
 
 import { format } from "date-fns";
+import Swal from "sweetalert2";
 
 const ListagemEventos = (props) => {
 
     const [listaEvento, setListaEvento] = useState([])
-    const [verEvento, setVerEventos] = useState([])
+    // const [verEvento, setVerEventos] = useState([])
+    const [tipoModal, setTipoModal] = useState("")
+    const [dadosModal, setDadosModal] = useState([])
 
+    const [modalAberto, setModalAberto] = useState(false)
+
+    const [filtro, setFiltro] = useState(["todos"])
+    const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
 
     async function listarEventos() {
-
         try {
+            //pego o eventos em geral
             const resposta = await api.get("eventos");
-            setListaEvento(resposta.data)
+            const todosOsEventos = resposta.data;
+            const respostaPresencas = await api.get("PresencasEventos/ListarMinhas/" + usuarioId)
+            const minhasPresencas = respostaPresencas.data;
+
+            const eventosComPresencas = todosOsEventos.map((atualEvento) => {
+                const presenca = minhasPresencas.find(p => p.idEvento === atualEvento.idEvento);
+                return {
+                    ...atualEvento,
+
+                    possuiPresenca: presenca?.situacao === true,
+                }
+            })
+
+            setListaEvento(eventosComPresencas)
+
+
         } catch (error) {
             console.error("Erro ao buscar eventos:", error);
         }
@@ -32,7 +54,57 @@ const ListagemEventos = (props) => {
         listarEventos();
     }, [])
 
+    function abrirModal(tipo, dados) {
+        //Tipo de modal, dados do modal 
+        setModalAberto(true)
+        setDadosModal(dados);
+        setTipoModal(tipo);
+    }
 
+    function fecharModal() {
+        setModalAberto(false);
+        setDadosModal({})
+        setTipoModal("")
+    }
+
+    async function manipularPresenca(idEvento, presenca, IdPresencaEvento) {
+        console.log("chamando manipular");
+        console.log('idEvento:', idEvento);
+        console.log('idPresenca:', IdPresencaEvento);
+        console.log('presenca:', presenca);
+
+        try {
+            if (presenca && IdPresencaEvento !== "") {
+                // Atualiza: situação para false (remover presença)
+                await api.put(`PresencasEventos/${IdPresencaEvento}`, { situacao: false });
+                Swal.fire('Removido!', 'Sua presença foi removida.', 'success');
+            } else if (IdPresencaEvento !== "") {
+                // Atualiza: situação para true (confirmar presença)
+                await api.put(`PresencasEventos/${IdPresencaEvento}`, { situacao: true });
+                Swal.fire('Confirmado!', 'Sua presença foi confirmada.', 'success');
+            } else {
+                // Cria nova presença
+                await api.post("PresencasEventos", { situacao: true, idUsuario: usuarioId, idEvento: idEvento });
+                Swal.fire('Confirmado!', 'Sua presença foi confirmada.', 'success');
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire('Erro!', 'Algo deu errado ao manipular presença.', 'error');
+        }
+    }
+
+
+    function filtrarEventos() {
+        const hoje = new Date();
+        return listaEvento.filter(evento => {
+            const dataEvento = new Date(evento.dataEvento);
+
+            if (filtro.includes("todos")) return true;
+            if (filtro.includes("futuros") && dataEvento > hoje) return true;
+            if (filtro.includes("passados") && dataEvento < hoje) return true;
+            return false;
+        })
+    }
 
     return (
         <>
@@ -47,23 +119,19 @@ const ListagemEventos = (props) => {
 
                         <select className="select"
                             value={props.valorSelect}
-                            onChange={(e) => props.setValorSelect(e.target.value)}
+                            onChange={(e) => setFiltro(e.target.value)}
                         >
-                            <option value="" disabled>Todos os Eventos</option>
+                            <option value="Todos" selected>Todos os Eventos</option>
 
-                            {props.lista && props.lista.length > 0 && props.lista.map((itemEvento) => (
-                                (
-                                    <option key={itemEvento.idEvento} value={itemEvento.idEvento}>
-                                        {itemEvento.nomeEvento}
-                                    </option>
+                            <option value="Futuros" selected>Somente Futuros</option>
 
-                                ))
-                            )}
+                            <option value="Passados" selected>Somente Passados</option>
+
+
                         </select>
 
                         <table>
                             <thead>
-                                {/*tr = table row, linha da tabela*/}
                                 <tr className="table_eventos">
                                     <th>Titulo</th>
                                     <th>Data do Evento</th>
@@ -76,15 +144,29 @@ const ListagemEventos = (props) => {
 
                             <tbody>
                                 {listaEvento.length > 0 ? (
-                                    listaEvento.map((item) => (
+                                    filtrarEventos() && filtrarEventos().map((item) => (
 
-                                        <tr className="item_listaEventos">
+                                        <tr key={item.idPresencaEvento}className="item_listaEventos">
                                             <td data-cell="Nome">{item.nomeEvento}</td>
                                             <td data-cell="Data">{format(item.dataEvento, "dd/MM/yyyy")}</td>
                                             <td data-cell="Tipo Evento">{item.tiposEvento.tituloTipoEvento}</td>
-                                            <td data-cell="descricao"><img src={descricao} alt="descricao" /></td>
-                                            <td data-cell="comentario"><img src={comentario} alt="balao" /></td>
-                                            <td data-cell="botao"><Toggle /></td>
+
+                                            <td data-cell="descricao">
+                                                <button className="icon" onClick={() =>
+                                                    abrirModal("descricaoEvento", { descricao: item.descricao })}>
+                                                    <img src={descricao} alt="descricao" />
+                                                </button></td>
+
+                                            <td data-cell="comentario">
+                                                <button className="icon" onClick={() => abrirModal("comentarios",
+                                                    { idEvento: item.idEvento })}>
+                                                    <img src={comentario} alt="balao" />
+                                                </button>
+                                            </td>
+
+                                            <td data-cell="botao"><Toggle presenca={item.possuiPresenca}
+                                                manipular={() => manipularPresenca(item.idEvento, item.possuiPresenca, item.iddPresencaEvento)
+                                                } /></td>
                                         </tr>
                                     )
                                     )
@@ -102,12 +184,19 @@ const ListagemEventos = (props) => {
                 </section>
             </main>
 
-                <Footer/>
+            <Footer />
 
-                <Modal/>
+            {modalAberto && (
+                <Modal
+                    titulo={tipoModal == "descricaoEvento" ? "Descriçao do Evento" : "Comentarios"}
+                    tipoModel={tipoModal}
+                    idEvento={dadosModal.idEvento}
+                    descricao={dadosModal.descricao}
+                    fecharModal={fecharModal}
+                />
+            )}
+
         </>
-
-
     )
 
 }
