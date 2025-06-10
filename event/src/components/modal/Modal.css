@@ -108,3 +108,16 @@
 .botao button:hover {
     background-color: #ad1457;
 }
+
+
+.icon{
+    background-color: transparent;
+    border: none;
+}
+
+.botaoCad{
+    background-color: white;
+    border-radius: 6px;
+    margin: 10px 0px 0px 0px;
+    padding: 4px;
+}

@@ -72,7 +72,7 @@ const Modal = (props) => {
                                         value={novoComentario}
                                         onChange={(e) => setNovoComentario(e.target.value)}
                                     />
-                                    <button onClick={() => cadastrarComentario(novoComentario)}>
+                                    <button className="botaoCad" onClick={() => cadastrarComentario(novoComentario)}>
                                         Cadastrar
                                     </button>
                                 </div>

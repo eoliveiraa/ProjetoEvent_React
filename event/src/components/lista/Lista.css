@@ -17,7 +17,7 @@
 }
 
 .tabela {
-    width: 100%;
+    /* width: 100%; */
     padding: 40px
 }
 
@@ -85,6 +85,9 @@
 
 }
 
+.layout_grid{
+    width: 700px;
+}
 
 
 

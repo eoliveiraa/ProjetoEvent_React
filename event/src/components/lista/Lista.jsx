@@ -37,7 +37,7 @@ const Listagem = (props) => {
                                             : 'Sem data'}
                                     </td>
 
-                                    <td data-cell="Evento">{props.nomeEvento}{item.tiposEvento?.tituloTipoEvento}</td>
+                                    <td data-cell="Evento" style={{display:props.visivelEV }}>{props.nomeEvento}{item.tiposEvento?.tituloTipoEvento}</td>
                                     <td data-cell="Editar" className="right"><img src={editar} alt="Imagem de uma caneta" onClick={() => { props.funcEditar(item) }} style={{ cursor: "pointer" }} /></td>
                                     <td data-cell="Excluir">
                                         <img

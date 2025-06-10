@@ -139,7 +139,9 @@ const TipoEvento = () => {
                     visivelD="none"
                     tipo="Titulo"
                     visivelTipo="none"
-                    visivelDt="none"/>
+                    visivelDt="none"
+                    visivelEV="none"
+                    />
             </main>
             <Footer/>
         </Fragment>

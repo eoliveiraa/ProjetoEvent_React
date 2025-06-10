@@ -144,6 +144,7 @@ const TipoUsuario = () => {
                     visivelD="none"
                     visivelTipo="none"
                     visivelDt="none"
+                    visivelEV="none"
                 />
 
 
