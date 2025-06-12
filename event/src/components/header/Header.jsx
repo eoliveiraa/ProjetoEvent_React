@@ -10,16 +10,18 @@ const Header = (props) => {
                 <Link to="/">
                     <img src={Logo} alt="Logo do Event Plus" />
                 </Link>
+
                 <nav className="nav_header">
                     <Link className="link_header" to="/Home">Home</Link>
                     <Link className="link_header" to="/TipoEvento">Eventos</Link>
                     <Link className="link_header" to="/TipoUsuario">Usuarios</Link>
                     <Link className="link_header" to="/Contatos">Contatos</Link>
                     <Link className="link_header" to="/Administrador">{props.adm}</Link>
-                    <Link to="/">
-                    <img src={Porta} alt="Imagem de porta"/>
-                    </Link>
                 </nav>
+                
+                    <Link to="/">
+                    <img src={Porta} alt="Imagem de porta" className="porta"/>
+                    </Link>
 
 
             </div>

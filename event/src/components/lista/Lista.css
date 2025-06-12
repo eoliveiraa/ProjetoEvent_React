@@ -17,7 +17,7 @@
 }
 
 .tabela {
-    /* width: 100%; */
+    width: 100%;
     padding: 40px
 }
 
@@ -46,7 +46,7 @@
 }
 
 .tabela .table_cabecalho th {
-    /* width: 100px; */
+    width: 100px;
     color: white;
 }
 
@@ -85,9 +85,9 @@
 
 }
 
-.layout_grid{
-    width: 700px;
-}
+/* .layout_grid{
+    width: 600px;
+} */
 
 
 

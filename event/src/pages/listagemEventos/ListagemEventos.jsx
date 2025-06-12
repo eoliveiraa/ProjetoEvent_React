@@ -11,6 +11,7 @@ import api from "../../Services/services";
 
 import { format } from "date-fns";
 import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ListagemEventos = (props) => {
 
@@ -22,14 +23,16 @@ const ListagemEventos = (props) => {
     const [modalAberto, setModalAberto] = useState(false)
 
     const [filtro, setFiltro] = useState(["todos"])
-    const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
+    // const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
+
+    const { usuario } = useAuth();
 
     async function listarEventos() {
         try {
             //pego o eventos em geral
             const resposta = await api.get("eventos");
             const todosOsEventos = resposta.data;
-            const respostaPresencas = await api.get("PresencasEventos/ListarMinhas/" + usuarioId)
+            const respostaPresencas = await api.get("PresencasEventos/ListarMinhas/" + usuario.idUsuario)
             const minhasPresencas = respostaPresencas.data;
 
             const eventosComPresencas = todosOsEventos.map((atualEvento) => {
@@ -53,6 +56,7 @@ const ListagemEventos = (props) => {
 
     useEffect(() => {
         listarEventos();
+        // console.log(usuario);
     }, [])
 
     function abrirModal(tipo, dados) {
@@ -81,7 +85,7 @@ const ListagemEventos = (props) => {
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success');
             } else {
                 //cadastrar uma nova presenca
-                await api.post("PresencasEventos", { situacao: true, idUsuario: usuarioId, idEvento: idEvento });
+                await api.post("PresencasEventos", { situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success');
             }
 
@@ -115,18 +119,17 @@ const ListagemEventos = (props) => {
                     <h1>Eventos</h1>
                     <hr />
 
-
                     <div className="tabela_eventos">
 
                         <select className="select"
                             value={props.valorSelect}
                             onChange={(e) => setFiltro(e.target.value)}
                         >
-                            <option value="Todos" selected>Todos os Eventos</option>
+                            <option value="todos" selected>Todos os Eventos</option>
 
-                            <option value="Futuros" selected>Somente Futuros</option>
+                            <option value="futuros" selected>Somente Futuros</option>
 
-                            <option value="Passados" selected>Somente Passados</option>
+                            <option value="passados" selected>Somente Passados</option>
 
 
                         </select>

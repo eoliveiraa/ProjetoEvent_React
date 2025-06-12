@@ -11,7 +11,7 @@ const Listagem = (props) => {
             <h1>{props.tituloLista}</h1>
             <hr className="hr_listagem" />
 
-            <div className="layout_grid tabela">
+            <div className="tabela layout_grid">
                 <table>
                     <thead>
                         <tr className="table_cabecalho">
@@ -31,14 +31,22 @@ const Listagem = (props) => {
                                         {props.tipoLista == "tiposEventos" ? item.tituloTipoEvento : (props.tipoLista == "tiposUsuarios" ? item.tituloTipoUsuario : item.nomeEvento)}
                                     </td>
 
-                                    <td data-cell="Data"  style={{ display:props.visivelDt}}>
+                                    <td data-cell="Data" style={{ display: props.visivelDt }}>
                                         {item.dataEvento
                                             ? format(new Date(item.dataEvento), 'dd/MM/yyyy')
                                             : 'Sem data'}
                                     </td>
 
-                                    <td data-cell="Evento" style={{display:props.visivelEV }}>{props.nomeEvento}{item.tiposEvento?.tituloTipoEvento}</td>
-                                    <td data-cell="Editar" className="right"><img src={editar} alt="Imagem de uma caneta" onClick={() => { props.funcEditar(item) }} style={{ cursor: "pointer" }} /></td>
+                                    <td data-cell="Evento" style={{ display: props.visivelEV }}>{props.nomeEvento}{item.tiposEvento?.tituloTipoEvento}</td>
+
+                                    <td data-cell="Editar" className="right">
+                                        <img
+                                            src={editar}
+                                            alt="Imagem de uma caneta"
+                                            onClick={() => props.funcEditar(item)}
+                                            style={{ cursor: "pointer" }} />
+                                    </td>
+
                                     <td data-cell="Excluir">
                                         <img
                                             src={excluir}
@@ -47,7 +55,7 @@ const Listagem = (props) => {
                                             style={{ cursor: "pointer" }}
                                         />
                                     </td>
-                                   
+
                                     <td style={{ display: props.visivelD }} data-cell="Descrição" className="descricao">
                                         <img src={Detalhes} alt="Detalhes" onClick={() => { props.funcDescricao(item) }} style={{ cursor: "pointer" }} />
                                     </td>

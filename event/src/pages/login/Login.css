@@ -3,19 +3,20 @@
     height: 100vh;
 }
 
-.banner {
+.banner{
     background-color: #b51d44;
     flex: 1;
-
-}
-
-.banner img {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    margin-top: 190px;
-    margin-left: 20px;
-    margin-right: 20px;
+    /* flex-direction: column; */
+}
+
+.login{
+    width: 650px;
+}
+
+.event{
+    width: 250px;
 }
 
 .section_login {
@@ -29,7 +30,7 @@
 
 .form_login {
     color: white;
-    width: 70%;
+    width: 60%;
     height: 50%;
 
     display: flex;
@@ -61,10 +62,10 @@
    
 }
 
-.section_login img{
+/* .section_login img{
     width: 170px;
     margin-bottom: 90px;
-}
+} */
 
 .link_senha a{
     color: rgb(165, 161, 161);

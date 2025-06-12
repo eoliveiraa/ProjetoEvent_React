@@ -56,6 +56,7 @@ const TipoEvento = () => {
     }
 
     async function listarTipoEvento() {
+       
         try {
             const resposta = await api.get("tiposEventos");
             setListaTipoEventos(resposta.data);
@@ -105,7 +106,7 @@ const TipoEvento = () => {
         });
         if (novoTipo) {
             try {
-                api.put(`tiposEventos/${tipoEvento.idTipoEvento}`, { TituloTipoEvento: novoTipo });
+                await api.put(`tiposEventos/${tipoEvento.idTipoEvento}`, { TituloTipoEvento: novoTipo });
                 Swal.fire(`tipo evento modificado para: ${novoTipo}`);
             } catch (error) {
                 console.log(error);
@@ -118,7 +119,7 @@ const TipoEvento = () => {
 
     useEffect(() => {
         listarTipoEvento();
-    }, [listarTipoEvento])
+    }, [listaTipoEvento])
 
 
     return (

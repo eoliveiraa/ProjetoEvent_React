@@ -106,16 +106,13 @@ const Cadastrar = () => {
 
 
     async function editarEvento(evento) {
-
-        console.log("Dado recebido para edição:", evento);
-
         try {
             const tiposOptions = listaTipoEvento
                 .map(tipo => `<option value="${tipo.idTipoEvento}" ${tipo.idTipoEvento === evento.idTipoEvento ? 'selected' : ''}>${tipo.tituloTipoEvento}</option>`)
                 .join('');
 
             const { value } = await Swal.fire({
-                title: "Editar Evento",
+                title: "Editar Tipo de Evento",
                 html: `
         <input id="campo1" class="swal2-input" placeholder="Título" value="${evento.nomeEvento || ''}">
         <input id="campo2" class="swal2-input" type="date" value="${evento.dataEvento?.substring(0, 10) || ''}">
@@ -141,35 +138,24 @@ const Cadastrar = () => {
                 }
             });
 
-            if (!value) {
-                console.log("Edição cancelada pelo usuário.");
-                return;
-            }
-
-            console.log("Dados para atualizar:", value);
-
-            await api.put(`Eventos/${evento.idEvento}`, {
+            await api.put(`eventos/${evento.idEvento}`, {
                 nomeEvento: value.campo1,
                 dataEvento: value.campo2,
                 idTipoEvento: value.campo3,
                 descricao: value.campo4,
             });
 
-            console.log("Evento atualizado com sucesso!");
-            Swal.fire("Sucesso!", "Dados salvos com sucesso.", "success");
+            alertar("success", "Dados salvos com sucesso.");
             listarEvento();
-
         } catch (error) {
-            console.log("Erro completo:", error);
-            console.log("Resposta do erro:", error.response);
-            Swal.fire("Erro!", "Não foi possível atualizar.", "error");
+            alertar("error", "Não foi possível atualizar.");
         }
-
     }
+
     useEffect(() => {
         listarTipoEvento();
         listarEvento();
-    }, []);
+    }, [listaEvento]);
 
 
     return (

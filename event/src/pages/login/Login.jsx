@@ -12,12 +12,15 @@ import { userDecodeToken } from "../../auth/Auth";
 import secureLocalStorage from "react-secure-storage";
 
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../contexts/AuthContext";
 
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("")
     const navigate = useNavigate();
+
+    const { setUsuario} = useAuth();
 
     async function realizarAutenticacao(e) {
         e.preventDefault();
@@ -31,10 +34,15 @@ const Login = () => {
                 if (token) {
                     const tokenDecodificado = userDecodeToken(token);
                     // console.log("tokendecodificado.tipoUsuario") exibe somente o dado que voce quer
+                    setUsuario(tokenDecodificado);
 
                     secureLocalStorage.setItem("tokenLogin", JSON.stringify(tokenDecodificado));
+                    console.log("o tipo de usuario e:");
 
-                    if (tokenDecodificado.tipoUsuario == "aluno") {
+                    // console.log(tokenDecodificado.tipoUsuario);
+
+
+                    if (tokenDecodificado.tipoUsuario === "aluno") {
                         //encaminha para tela de eventos
                         navigate("/ListagemEvento")
                     } else {
@@ -44,12 +52,12 @@ const Login = () => {
                 }
 
             } catch (error) {
-               Swal.fire({
-                icon: "error",
-                title: "Email ou senha invalidos!",
-                text:"Para duvidas entre em contato com o suporte",
-                popup: 'swal-popup',
-            });
+                Swal.fire({
+                    icon: "error",
+                    title: "Email ou senha invalidos!",
+                    text: "Para duvidas entre em contato com o suporte",
+                    popup: 'swal-popup',
+                });
             }
 
         } else {
@@ -65,11 +73,11 @@ const Login = () => {
     return (
         <main className="main_login">
             <div className="banner">
-                <img src={login} alt="imagem login" />
+                <img src={login} alt="imagem login" className="login"/>
             </div>
 
             <section className="section_login">
-                <img src={Logo} alt="Logo Event" />
+                <img src={Logo} alt="Logo Event" className="event" />
 
                 <form action="" className="form_login" onSubmit={realizarAutenticacao}>
                     <div className="campo_login">

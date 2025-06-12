@@ -26,7 +26,9 @@ const Modal = (props) => {
 
     async function cadastrarComentario(comentario) {
         try {
+            console.log("ID Evento no modal:")
             await api.post("ComentariosEventos", {
+
                 idUsuario: usuarioId,
                 idEvento: props.idEvento,
                 descricao: comentario
@@ -72,7 +74,9 @@ const Modal = (props) => {
                                         value={novoComentario}
                                         onChange={(e) => setNovoComentario(e.target.value)}
                                     />
-                                    <button className="botaoCad" onClick={() => cadastrarComentario(novoComentario)}>
+                                    <button
+                                        className="botao"
+                                        onClick={() => cadastrarComentario(novoComentario)}>
                                         Cadastrar
                                     </button>
                                 </div>

@@ -120,7 +120,7 @@ const TipoUsuario = () => {
 
     useEffect(() => {
         listarTipoUsuario();
-    }, [])
+    }, [listaTipoUsuario])
 
 
     return (

@@ -21,7 +21,7 @@
     width: 80%;
     margin-top: 40px;
     text-align: center;
-    margin-left: -60px;
+    /* margin-left: -60px; */
 
 }
 
@@ -34,20 +34,20 @@
 
 .tabela_eventos .table_eventos :nth-child(2) {
     width: 760px;
-    text-align: start;
+    text-align: center;
     
 
 }
 
 
 .tabela_eventos .item_listaEventos :nth-child(2){
-    text-align: start;
+    text-align: center;
     
 }
 
 .tabela_eventos .table_eventos th {
     border-bottom: 1px solid #B51D44;
-    width: 100px;
+    width: 200px;
     padding: 5px 0;
     
 }
@@ -76,4 +76,11 @@
 h1{
     border-bottom: 1px solid #B51D44;
     text-transform: uppercase;
+}
+
+.icon{
+border: none;
+border-left: none;
+border-right: none;
+background-color: transparent;
 }
