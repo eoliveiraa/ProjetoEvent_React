@@ -3,8 +3,8 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer"
 
 import banner from "../../assets/img/banner.svg"
-import Mapa from "../../assets/img/mapa.svg"
-// import Visao from "../../assets/img/visao.png"
+import mapa from "../../assets/img/mapa.svg"
+import Visao from "../../assets/img/Visao.svg"
 
 
 const Home = () => {
@@ -25,42 +25,42 @@ const Home = () => {
                         </div>
 
                         <div className="lista_eventos layout_grid">
-                            <div className="item">
+                            <article className="item">
                                 <h1>Titulo do Evento</h1>
 
                                 <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
 
                                 <button>Conectar</button>
-                            </div>
+                            </article>
 
-                            <div className="item">
+                            <article className="item">
                                 <h1>Titulo do Evento</h1>
 
                                 <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
 
                                 <button>Conectar</button>
-                            </div>
+                            </article>
 
-                            <div className="item">
+                            <article className="item">
                                 <h1>Titulo do Evento</h1>
 
                                 <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
 
                                 <button>Conectar</button>
-                            </div>
+                            </article>
 
-                            <div className="item">
+                            <article className="item">
                                 <h1>Titulo do Evento</h1>
 
                                 <p>Breve descrição do evento, pode ser um paragrafo pequeno</p>
 
                                 <button>Conectar</button>
-                            </div>
+                            </article>
                         </div>
                     </div>
 
                     <div className="visao">
-                        {/* <img src={Visao} alt="" /> */}
+                        <img src={Visao} alt="" />
                     </div>
 
                     <div className="contato">
@@ -71,7 +71,7 @@ const Home = () => {
 
                         <div className="mapa_informacoes layout_grid">
                             <div className="mapa">
-                                <img src={Mapa} alt="" />
+                                <img src={mapa} alt="" />
                             </div>
 
                             <div className="informacoes_contato">

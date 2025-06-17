@@ -96,9 +96,6 @@ const ListagemEventos = (props) => {
         }
     }
 
-
-
-
     function filtrarEventos() {
         const hoje = new Date();
         return listaEvento.filter(evento => {
@@ -113,7 +110,8 @@ const ListagemEventos = (props) => {
 
     return (
         <>
-            <Header adm="Alunos" />
+            <Header adm="Alunos"
+            visivelHeader="none" />
             <main className="listaEventos layout_grid">
                 <section className="listagemEventos" id="">
                     <h1>Eventos</h1>

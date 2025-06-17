@@ -2,12 +2,39 @@ import { useEffect, useState } from "react";
 import imgDeletar from "../../assets/img/deletar.svg";
 import "./Modal.css"
 
+import Swal from 'sweetalert2'
+
 import api from "../../Services/services";
+
+import { useAuth } from "../../contexts/AuthContext";
 
 const Modal = (props) => {
 
+    function alertar(icone, mensagem) {
+            //------------ALERTA------------------
+    
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: icone,
+                title: mensagem
+            });
+    
+            //----------FIM DO ALERTA--------------
+        }
+
     const [comentarios, setComentarios] = useState([])
-    const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
+    // const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
+    const { usuario } = useAuth();
     const [novoComentario, setNovoComentario] = useState("")
 
 
@@ -26,15 +53,21 @@ const Modal = (props) => {
 
     async function cadastrarComentario(comentario) {
         try {
-            console.log("ID Evento no modal:")
-            await api.post("ComentariosEventos", {
+            console.log(usuario.idUsuario)
+            console.log(props.idEvento)
+            console.log(comentario)
+           await api.post("ComentariosEventos", {
 
-                idUsuario: usuarioId,
+                idUsuario: usuario.idUsuario,
                 idEvento: props.idEvento,
                 descricao: comentario
             })
+
+
         } catch (error) {
-            console.log(error);
+            // console.log(error.response.data);
+
+            alertar("error" , error.response.data)
 
         }
     }

@@ -138,16 +138,20 @@ const Cadastrar = () => {
                 }
             });
 
-            await api.put(`eventos/${evento.idEvento}`, {
+      
+           await api.put(`Eventos/${evento.idEvento}`, {
                 nomeEvento: value.campo1,
                 dataEvento: value.campo2,
                 idTipoEvento: value.campo3,
                 descricao: value.campo4,
+                idInstituicao: "23E29B9F-96F8-45DD-9046-81561687FC08"
             });
 
             alertar("success", "Dados salvos com sucesso.");
+            
             listarEvento();
         } catch (error) {
+            console.log("Deu ruim aqui");
             alertar("error", "Não foi possível atualizar.");
         }
     }
