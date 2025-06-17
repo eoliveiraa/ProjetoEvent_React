@@ -11,26 +11,26 @@ import { useAuth } from "../../contexts/AuthContext";
 const Modal = (props) => {
 
     function alertar(icone, mensagem) {
-            //------------ALERTA------------------
-    
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: icone,
-                title: mensagem
-            });
-    
-            //----------FIM DO ALERTA--------------
-        }
+        //------------ALERTA------------------
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: icone,
+            title: mensagem
+        });
+
+        //----------FIM DO ALERTA--------------
+    }
 
     const [comentarios, setComentarios] = useState([])
     // const [usuarioId, setUsuarioId] = useState("B2381F43-9D74-400D-B3ED-FD05D20E9885")
@@ -56,19 +56,38 @@ const Modal = (props) => {
             console.log(usuario.idUsuario)
             console.log(props.idEvento)
             console.log(comentario)
-           await api.post("ComentariosEventos", {
+            Swal.fire({
+                title: 'Enviando comentário...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            await api.post("ComentariosEventos", {
 
                 idUsuario: usuario.idUsuario,
                 idEvento: props.idEvento,
                 descricao: comentario
             })
 
+            Swal.fire({
+                icon: 'success',
+                title: 'Comentário enviado com sucesso!'
+            });
+
+
+
 
         } catch (error) {
             // console.log(error.response.data);
 
-            alertar("error" , error.response.data)
-
+            alertar("error", error.response.data)
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro ao enviar comentário',
+                text: 'Tente novamente mais tarde.'
+            });
         }
     }
 
