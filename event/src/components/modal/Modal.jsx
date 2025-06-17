@@ -92,12 +92,24 @@ const Modal = (props) => {
     }
 
     async function deletarComentario(idComentario) {
-        try {
-            await api.delete(`ComentariosEventos/${idComentario}`)
-        } catch (error) {
+     Swal.fire({
+            title: 'Tem Certeza?',
+            text: "Essa ação não poderá ser desfeita!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#B51D44',
+            cancelButtonColor: '#000000',
+            confirmButtonText: 'Sim, apagar!',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                api.delete(`comentariosEventos/${idComentario}`);
+                alertar("success", "Comentário Excluido!");
+            }
+        }).catch(error => {
             console.log(error);
-
-        }
+            alertar("error", "Erro ao Excluir!");
+        })
     }
 
     return (

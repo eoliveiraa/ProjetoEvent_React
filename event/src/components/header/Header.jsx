@@ -83,8 +83,7 @@ const [menuAberto, setMenuAberto] = useState(false);
                     <Link className="link_header" to="/Administrador">{props.adm}</Link>
                 </nav>
 
-                <Link onClick={() => realizarLogOut()}
-                    to="/">
+                <Link onClick={() => realizarLogOut()}>
                     <img src={Porta} alt="Imagem de porta" className="porta" />
                 </Link>
 
